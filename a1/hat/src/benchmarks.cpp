@@ -16,11 +16,16 @@ static __inline__ unsigned long long rdtsc(void){
     return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32   );
 }
 
+/*
+ * Benchmarks overall throughput 
+ */
 void pushBenchmark() {
 	HashedArrayTree * hat = new HashedArrayTree();
 	DynamicArray * vec = new DynamicArray();
 
 	cout << "=== PUSH BENCHMARK ===" << endl;
+
+	// Test dynamic array
 	unsigned long long cpu_start = rdtsc();
 	for (int i = 0; i < N; i++) {
 		vec->push(i);
@@ -29,6 +34,7 @@ void pushBenchmark() {
 
     std::cout << "VEC: Total CPU Clocks:   " << cpu_finish - cpu_start << std::endl;
 
+	// Test hashed array tree
 	cpu_start = rdtsc();
 	for (int i = 0; i < N; i++) {
 		hat->push(i);
@@ -43,6 +49,9 @@ void pushBenchmark() {
 	delete vec;
 }
 
+/*
+ * Benchmarks append latency
+ */
 void averagePushBenchmark() {
 	HashedArrayTree * hat = new HashedArrayTree();
 	DynamicArray * vec = new DynamicArray();
@@ -85,6 +94,9 @@ void averagePushBenchmark() {
 	cout << endl;
 }
 
+/*
+ * Benchmarks scan latency
+ */
 void accessBenchmark() {
 	HashedArrayTree * hat = new HashedArrayTree();
 	DynamicArray * vec = new DynamicArray();
@@ -120,6 +132,9 @@ void accessBenchmark() {
 	cout << endl;
 }
 
+/*
+ * Benchmarks access latency
+ */
 void averageAccessBenchmark() {
 	HashedArrayTree * hat = new HashedArrayTree();
 	DynamicArray * vec = new DynamicArray();
@@ -169,7 +184,7 @@ void averageAccessBenchmark() {
 
 int main() {
 	pushBenchmark();
-	averagePushBenchmark();
-	accessBenchmark();
-	averageAccessBenchmark();
+	//averagePushBenchmark();
+	//accessBenchmark();
+	//averageAccessBenchmark();
 }

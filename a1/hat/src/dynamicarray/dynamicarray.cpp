@@ -3,6 +3,9 @@
 
 using namespace std;
 
+/*
+ * Constructor for Dynamic Array
+ */
 DynamicArray::DynamicArray() {
 	length = 0;
 	capacity = DEFAULT_ARRAY_SIZE;
@@ -10,14 +13,24 @@ DynamicArray::DynamicArray() {
 	tailIdx = 0;
 	data = new int [capacity];
 }
+
+/*
+ * Gets size of array
+ */
 int DynamicArray::size() {
 	return length;
 }
 
+/*
+ * Returns whether or not array is full
+ */
 bool DynamicArray::isFull() {
 	return length == capacity;
 }
 
+/*
+ * Doubles the array size
+ */
 void DynamicArray::grow() {
 	int newCapacity = capacity * 2;
 	int * new_data = new int [newCapacity];
@@ -33,6 +46,9 @@ void DynamicArray::grow() {
 	capacity = newCapacity;
 }
 
+/*
+ * Pushes an element elt into the end of the array
+ */
 void DynamicArray::push(int elt) {
 	if (isFull()) {
 		grow();
@@ -42,11 +58,17 @@ void DynamicArray::push(int elt) {
 	length++;
 }
 
+/*
+ * Gets an element at index idx in the array
+ */
 int DynamicArray::get(int idx) {
 	// I trust the user completely
 	return data[idx];
 }
 
+/*
+ * Returns string representation of the array
+ */
 string DynamicArray::toString() {
 	string ret;
 

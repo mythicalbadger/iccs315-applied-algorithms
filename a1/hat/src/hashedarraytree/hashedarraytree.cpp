@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/*
+ * Hashed Array Tree constructor
+ */
 HashedArrayTree::HashedArrayTree() {
 	length = 0;
 	capacity = b*b;
@@ -17,14 +20,23 @@ HashedArrayTree::HashedArrayTree() {
 	}
 }
 
+/*
+ * Returns Hashed Array Tree size
+ */
 int HashedArrayTree::size() {
 	return length;
 }
 
+/*
+ * Returns whether or not the Hashed Array Tree is full
+ */
 bool HashedArrayTree::isFull() {
 	return length == capacity;
 }
 
+/*
+ * Grows the Hashed Array Tree
+ */
 void HashedArrayTree::grow() {
 	int newB = b*2;
 	int k = log2(newB);
@@ -58,6 +70,9 @@ void HashedArrayTree::grow() {
 	capacity = b*b;
 }
 
+/**
+ * Pushes an element to the end of Hashed Array Tree 
+ */
 void HashedArrayTree::push(int elt) {
 	if (isFull()) {
 		grow();
@@ -72,11 +87,17 @@ void HashedArrayTree::push(int elt) {
 	length++;
 }
 
+/*
+ * Gets and element and index idx from Hashed Array Tree
+ */
 int HashedArrayTree::get(int idx) {
 	// A bit different from indexing in class, which did not seem to work
 	return data_blocks[idx >> (int) log2(b)][idx & (b - 1)];
 }
 
+/*
+ * Returns string representation of the Hashed Array Tree
+ */
 string HashedArrayTree::toString() {
 	string ret;
 	int k = log2(b);
