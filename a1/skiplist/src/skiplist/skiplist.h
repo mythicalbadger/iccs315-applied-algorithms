@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #define DEFAULT_P 0.5
-#define DEFAULT_MAX_HEIGHT 1000
+#define DEFAULT_MAX_HEIGHT 16
 
 using namespace std;
 
