@@ -1,6 +1,9 @@
 #include <iostream>
 #include "btreenode.h"
 
+/*
+ * Constructor for the BTreeNode
+ */
 BTreeNode::BTreeNode(int a, bool leaf) {
 	this->a = a;	
 	this->b = 2*a;
@@ -10,9 +13,13 @@ BTreeNode::BTreeNode(int a, bool leaf) {
 	children = new BTreeNode * [b];
 }
 
+/*
+ * Kind of failed semi-deconstructor for B-Tree node?
+ */
 void BTreeNode::deleteAll() {
     int idx;
 
+	// Scan through the tree, recursively deleting all nodes
     for (idx = 0; idx < size; idx++) {
         if (!leaf)
             children[idx]->deleteAll();
@@ -27,6 +34,9 @@ void BTreeNode::deleteAll() {
 	delete this;
 }
 
+/*
+ * Displays the keys in the BTreeNode
+ */
 void BTreeNode::displayKeys() {
 	for (int i = 0; i < size; i++) {
 		std::cout << keys[i] << ' ';
@@ -34,10 +44,16 @@ void BTreeNode::displayKeys() {
 	std::cout << std::endl;
 }
 
+/*
+ * Returns whether or not the BTreeNode is full
+ */
 bool BTreeNode::isFull() {
 	return size == b - 1;
 }
 
+/*
+ * Inserts a new key into the B-Tree node
+ */
 void BTreeNode::insertKey(int k) {
 	int idx = size - 1;
 
@@ -68,6 +84,9 @@ void BTreeNode::insertKey(int k) {
 	}
 }
 
+/*
+ * Splits a child of a node
+ */
 void BTreeNode::splitChild(int idx, BTreeNode * child) {
 	// Create new node to store remainder
 	BTreeNode * newNode = new BTreeNode(child->a, child->leaf);
@@ -105,6 +124,9 @@ void BTreeNode::splitChild(int idx, BTreeNode * child) {
 	size++;
 }
 
+/**
+ * Searches the BTreeNode (and children) for a key
+ */
 BTreeNode * BTreeNode::search(int key) {
 	int idx;
 
@@ -118,4 +140,3 @@ BTreeNode * BTreeNode::search(int key) {
 	else
 		return children[idx]->search(key);
 }
-
